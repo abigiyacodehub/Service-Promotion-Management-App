@@ -42,6 +42,151 @@ button {
   cursor: pointer;
 }
 
+.portal-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 36px;
+  padding: 20px 20px 18px;
+  background: #f5f6f8;
+}
+
+.portal-header {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding-top: 0;
+  text-align: center;
+}
+
+.academy-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  background: #193765;
+  box-shadow: 0 18px 34px rgba(25, 55, 101, 0.18);
+}
+
+.logo-shield {
+  width: 82px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+  border: 4px solid #e9edf2;
+  border-radius: 42% 42% 48% 48%;
+  color: #193765;
+  background: linear-gradient(145deg, #ffffff, #d9dee6);
+  font-size: 38px;
+  font-weight: 900;
+  text-shadow: 0 1px 0 white;
+}
+
+.portal-header h1 {
+  margin: 22px 0 0;
+  color: #10284c;
+  font-size: 45px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.portal-header p {
+  margin: 0;
+  color: #5f7697;
+  font-size: 24px;
+}
+
+.portal-list {
+  width: min(768px, 100%);
+  justify-self: center;
+  display: grid;
+  align-content: start;
+  gap: 24px;
+}
+
+.portal-card {
+  min-height: 138px;
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  align-items: center;
+  gap: 30px;
+  padding: 28px 36px;
+  border: 1px solid #e6eaf0;
+  border-radius: 22px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(16, 40, 76, 0.04);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.portal-card:hover,
+.portal-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: #c9d5e4;
+  box-shadow: 0 18px 32px rgba(16, 40, 76, 0.1);
+  outline: none;
+}
+
+.portal-card strong,
+.portal-card small {
+  display: block;
+}
+
+.portal-card strong {
+  color: #10284c;
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.portal-card small {
+  margin-top: 10px;
+  color: #526b8d;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.portal-icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  color: white;
+  box-shadow: 0 14px 22px rgba(24, 41, 64, 0.18);
+}
+
+.portal-icon svg {
+  width: 42px;
+  height: 42px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.portal-icon.shield {
+  background: #13a9bd;
+}
+
+.portal-icon.admin {
+  background: #f08a24;
+}
+
+.portal-icon.truck {
+  background: #223047;
+}
+
+.portal-footer {
+  justify-self: center;
+  color: #8390a3;
+  font-size: 16px;
+}
+
+.portal-footer strong {
+  color: #586b86;
+}
+
 .auth-shell {
   min-height: 100vh;
   display: grid;
@@ -643,6 +788,58 @@ th {
 }
 
 @media (max-width: 640px) {
+  .portal-page {
+    gap: 22px;
+    padding: 20px 14px 16px;
+  }
+
+  .academy-logo {
+    width: 92px;
+    height: 92px;
+    border-radius: 18px;
+  }
+
+  .logo-shield {
+    width: 62px;
+    height: 70px;
+    font-size: 30px;
+  }
+
+  .portal-header h1 {
+    font-size: 34px;
+  }
+
+  .portal-header p {
+    font-size: 19px;
+  }
+
+  .portal-card {
+    grid-template-columns: 64px 1fr;
+    gap: 18px;
+    min-height: 112px;
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .portal-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+  }
+
+  .portal-icon svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .portal-card strong {
+    font-size: 23px;
+  }
+
+  .portal-card small {
+    font-size: 16px;
+  }
+
   .auth-card,
   .content,
   .topbar,

@@ -1,4 +1,9 @@
 const STORAGE_KEY = "spma-state-v1";
+const livePortalLinks = {
+  superadmin: "https://superadmin-pba-promo-mgmt.base44.app",
+  admin: "https://admin-pba-promo-mgmt.base44.app",
+  distributer: "#/distributer/dashboard"
+};
 
 const roleConfig = {
   superadmin: {
@@ -175,7 +180,7 @@ function saveState() {
 function route() {
   const raw = location.hash.replace(/^#\/?/, "");
   const parts = raw.split("/").filter(Boolean);
-  if (!parts.length) return { auth: "login", role: state.session.role, page: "dashboard" };
+  if (!parts.length) return { landing: true };
   if (["login", "register", "forgot-password"].includes(parts[0])) {
     return { auth: parts[0], role: parts[1] || state.session.role, page: "dashboard" };
   }
@@ -190,6 +195,10 @@ function navigate(path) {
 
 function render() {
   const current = route();
+  if (current.landing) {
+    renderLanding();
+    return;
+  }
   if (current.auth) {
     renderAuth(current.auth, current.role);
     return;
@@ -197,6 +206,44 @@ function render() {
   state.session.role = current.role;
   saveState();
   renderApp(current.role, current.page);
+}
+
+function renderLanding() {
+  const portals = [
+    ["superadmin", "Super Admin", "Organization-wide oversight & analytics", "shield"],
+    ["admin", "Admin", "Promotion setup, assignment & monitoring", "admin"],
+    ["distributer", "Distributer", "Daily work hub & customer registration", "truck"]
+  ];
+  document.getElementById("app").innerHTML = `
+    <main class="portal-page">
+      <section class="portal-header" aria-label="Prime Bridge Academy portal selector">
+        <div class="academy-logo" aria-hidden="true">
+          <div class="logo-shield">P</div>
+        </div>
+        <h1>Prime Bridge Academy</h1>
+        <p>Distribution Monitoring System</p>
+      </section>
+      <section class="portal-list" aria-label="Admin portals">
+        ${portals.map(([key, title, description, icon]) => `
+          <a class="portal-card" href="${livePortalLinks[key]}" ${livePortalLinks[key].startsWith("https") ? `target="_blank" rel="noopener noreferrer"` : ""}>
+            <span class="portal-icon ${icon}" aria-hidden="true">${portalIcon(icon)}</span>
+            <span>
+              <strong>${title}</strong>
+              <small>${description}</small>
+            </span>
+          </a>`).join("")}
+      </section>
+      <footer class="portal-footer">powered by <strong>Abigiya F. Kebede</strong></footer>
+    </main>`;
+}
+
+function portalIcon(icon) {
+  const icons = {
+    shield: `<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-2.8 8.7-7 10-4.2-1.3-7-5.4-7-10V6l7-3z"/><path d="M12 7v10"/></svg>`,
+    admin: `<svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="M18 8h3M19.5 6.5v3"/></svg>`,
+    truck: `<svg viewBox="0 0 24 24"><path d="M3 6h11v10H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>`
+  };
+  return icons[icon];
 }
 
 function renderAuth(mode, roleKey) {
