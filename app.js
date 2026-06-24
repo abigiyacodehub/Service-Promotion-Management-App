@@ -1,7 +1,7 @@
 const STORAGE_KEY = "spma-state-v1";
-const livePortalLinks = {
-  superadmin: "https://superadmin-pba-promo-mgmt.base44.app",
-  admin: "https://admin-pba-promo-mgmt.base44.app",
+const portalLinks = {
+  superadmin: "#/superadmin/dashboard",
+  admin: "#/admin/dashboard",
   distributer: "#/distributer/dashboard"
 };
 
@@ -217,15 +217,13 @@ function renderLanding() {
   document.getElementById("app").innerHTML = `
     <main class="portal-page">
       <section class="portal-header" aria-label="Prime Bridge Academy portal selector">
-        <div class="academy-logo" aria-hidden="true">
-          <div class="logo-shield">P</div>
-        </div>
+        <img class="academy-logo" src="assets/pba-logo.png" alt="Prime Bridge Academy logo">
         <h1>Prime Bridge Academy</h1>
         <p>Distribution Monitoring System</p>
       </section>
       <section class="portal-list" aria-label="Admin portals">
         ${portals.map(([key, title, description, icon]) => `
-          <a class="portal-card" href="${livePortalLinks[key]}" ${livePortalLinks[key].startsWith("https") ? `target="_blank" rel="noopener noreferrer"` : ""}>
+          <a class="portal-card" href="${portalLinks[key]}">
             <span class="portal-icon ${icon}" aria-hidden="true">${portalIcon(icon)}</span>
             <span>
               <strong>${title}</strong>
@@ -325,9 +323,7 @@ function renderApp(roleKey, page) {
         <header class="topbar">
           <div class="role-badge"><span class="dot ok"></span>${role.label} workspace</div>
           <div class="toolbar-actions">
-            <select data-action="switch-role" aria-label="Switch role">
-              ${Object.entries(roleConfig).map(([key, item]) => `<option value="${key}" ${key === roleKey ? "selected" : ""}>${item.label}</option>`).join("")}
-            </select>
+            <a class="btn secondary" href="#">Portal home</a>
             <button class="btn secondary" data-action="reset-demo">Reset demo</button>
             <button class="btn secondary" data-action="logout">Log out</button>
           </div>
@@ -676,11 +672,6 @@ document.addEventListener("change", event => {
     state.search = event.target.value;
     saveState();
     render();
-  }
-  if (event.target.matches("[data-action='switch-role']")) {
-    state.session.role = event.target.value;
-    saveState();
-    navigate(`/${event.target.value}/dashboard`);
   }
   if (event.target.matches("[data-action='role-preview']")) {
     navigate(`/${route().auth}/${event.target.value}`);
