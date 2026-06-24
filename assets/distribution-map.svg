@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-label="Distribution network map">
+  <defs>
+    <pattern id="grid" width="90" height="90" patternUnits="userSpaceOnUse">
+      <path d="M 90 0 L 0 0 0 90" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="900" fill="url(#grid)"/>
+  <g fill="none" stroke="rgba(255,255,255,.46)" stroke-width="6">
+    <path d="M160 230 C300 130 420 360 550 270 S730 310 780 170"/>
+    <path d="M115 610 C260 510 385 690 510 540 S710 530 800 710"/>
+    <path d="M250 735 C310 575 350 410 455 320 S640 245 735 390"/>
+  </g>
+  <g fill="#fff">
+    <circle cx="160" cy="230" r="18"/>
+    <circle cx="550" cy="270" r="22"/>
+    <circle cx="780" cy="170" r="15"/>
+    <circle cx="115" cy="610" r="18"/>
+    <circle cx="510" cy="540" r="24"/>
+    <circle cx="800" cy="710" r="16"/>
+    <circle cx="250" cy="735" r="18"/>
+    <circle cx="455" cy="320" r="20"/>
+    <circle cx="735" cy="390" r="17"/>
+  </g>
+</svg>
